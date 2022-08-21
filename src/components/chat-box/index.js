@@ -19,19 +19,19 @@ export default function ChatBox({ selectedUser }) {
     <div className='chat-box'>
       <div className='chats'>
         {
-          selectedUserConversation?.map((conversation) => (
-            <>
-              <div className='chat-row-me' key={conversation.date}>
+          selectedUserConversation?.reverse()?.map((conversation) => (
+            <React.Fragment key={conversation.date}>
+              <div className='chat-row-me' >
                 <div className='chat-msg-me'>{conversation.message}</div>
                 <img height={40} width={40} className='chat-avatar' src={userDetails?.profileImage} alt='avatar' />
               </div>
 
 
-              <div className='chat-row' key={conversation.date}>
+              <div className='chat-row' >
                 <img height={40} width={40} className='chat-avatar' src={conversation.profileImage} alt='avatar' />
                 <div className='chat-msg'>{conversation.reply}</div>
               </div>
-            </>
+            </React.Fragment>
           ))
         }
       </div>
