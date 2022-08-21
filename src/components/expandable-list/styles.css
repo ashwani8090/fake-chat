@@ -32,6 +32,10 @@
   font-size: 12px;
 }
 
+.scrollable{
+  max-height: 400px;
+  overflow: auto;
+}
 
 
 .expandable-list_header_title {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpandableList, ProfileCard } from '../../components';
+import { ExpandableList, ProfileCard, ChatBox } from '../../components';
 import { activeUsers } from './users';
 import { MessageOutlined } from '@ant-design/icons';
 import './styles.css';
@@ -19,8 +19,8 @@ const Messenger = () => {
                 <ExpandableList isExpanded title="Active Conversations" adjacentItemMsg={4} list={activeUsers} />
                 <ExpandableList title="Archived Conversations" adjacentItemMsg={7} list={activeUsers} />
             </div>
-            <div className='chat-box'>
-
+            <div className='chat-box-container'>
+                    <ChatBox />
             </div>
             <div className='right-side-panel'>
             </div>

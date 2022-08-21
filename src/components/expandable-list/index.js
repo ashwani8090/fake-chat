@@ -26,20 +26,22 @@ const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false 
                     }
                 </div>
             </div>
-            {
-                expanded && <div>
-                    {
-                        list.map((item, index) => {
-                            const { name, profileImage } = item;
-                            return (
-                                <div key={index} className='expandable_item_card'>
-                                    <img src={profileImage} alt={name} className='expandable_item_icon' />
-                                    <div className='expandable_item_title'>{name}</div>
-                                </div>)
-                        })
-                    }
-                </div>
-            }
+            <div className='scrollable'>
+                {
+                    expanded && <div>
+                        {
+                            list.map((item, index) => {
+                                const { name, profileImage } = item;
+                                return (
+                                    <div key={index} className='expandable_item_card'>
+                                        <img src={profileImage} alt={name} className='expandable_item_icon' />
+                                        <div className='expandable_item_title'>{name}</div>
+                                    </div>)
+                            })
+                        }
+                    </div>
+                }
+            </div>
         </div >
     )
 }

@@ -1,12 +1,13 @@
 @import '~antd/dist/antd.css';
 
 .App{
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background-color: #fafafa;
-  margin: 1px;
+  min-height: 100vh;
+  background-color: #edeef6;
   padding: 2px;
   color: gray;
+  overflow: hidden;
 }
 
 
