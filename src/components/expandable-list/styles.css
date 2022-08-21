@@ -71,7 +71,7 @@
   padding: 10px;
 }
 
-.expandable_item_card:hover{
+.expandable_item_card-selectable{
   background: #edf0f5;
   font-weight: bold;
 }

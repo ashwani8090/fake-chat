@@ -2,8 +2,9 @@ import React from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import './styles.css';
 
-const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false }) => {
+const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false, onRowClick = () => { }, defaultUser = {} }) => {
     const [expanded, setExpanded] = React.useState(isExpanded);
+    const [selectedUser, setSelectedUser] = React.useState(defaultUser);
     const onExpand = () => {
         setExpanded(!expanded);
     }
@@ -32,8 +33,13 @@ const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false 
                         {
                             list.map((item, index) => {
                                 const { name, profileImage } = item;
+                                const isSelected = item?.id === selectedUser?.id
                                 return (
-                                    <div key={index} className='expandable_item_card'>
+                                    <div key={index} className={`expandable_item_card ${isSelected ? 'expandable_item_card-selectable' : ''}`}
+                                        onClick={() => {
+                                            onRowClick(item);
+                                            setSelectedUser(item)
+                                        }}>
                                         <img src={profileImage} alt={name} className='expandable_item_icon' />
                                         <div className='expandable_item_title'>{name}</div>
                                     </div>)

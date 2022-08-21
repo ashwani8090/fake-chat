@@ -4,11 +4,11 @@ import { Switch } from 'antd';
 import './styles.css';
 
 const ProfileCard = ({
-    name = "Henry Boyd",
-    designation = "Web Developer",
-    onChange = () => { },
+    name = "",
+    designation = "",
+    onChangeActive = () => { },
     isActive = false,
-    profileImg = "https://www.eclipsegroup.co.uk/wp-content/uploads/2020/03/Round-Profile-Picture-768x768-1.png"
+    profileImg = ""
 }) => {
 
     return (
@@ -23,7 +23,7 @@ const ProfileCard = ({
                     {designation}
                 </div>
                 <div className='active_container'>
-                  <Switch size='small' className='switch' defaultChecked={isActive} onChange={onChange} />
+                  <Switch size='small' className='switch' defaultChecked={isActive} onChange={onChangeActive} />
                  <span>{isActive ? 'Active': 'Offline'}</span>
                 </div>
 
