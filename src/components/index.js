@@ -1,5 +1,9 @@
-import Header from './header';
+import ChatBar from "./chat-bar";
+import ExpandableList from "./expandable-list";
+import ProfileCard from "./profile";
 
 export {
-    Header,
+    ChatBar,
+    ExpandableList,
+    ProfileCard
 }

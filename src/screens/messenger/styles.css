@@ -1,0 +1,27 @@
+.messenger{
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.messenger_title_container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.messenger_title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin-inline-start: 10px;
+}
+.messenger_title_icon{
+    font-size: 40px;
+}
+
+.messenger_left-side-panel{
+    width: 250px;
+    padding-top: 10px;
+}
+

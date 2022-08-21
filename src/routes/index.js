@@ -1,17 +1,15 @@
 import { Switch } from 'react-router-dom';
-
+import { Messenger } from '../screens';
 import PublicRoute from './publicRoute';
-import { Calendar} from '../screens';
 
 const Routes = () => {
     return (
             <Switch>
                 <PublicRoute
                     path="/"
-                    component={Calendar}
+                    component={Messenger}
                     isAuthenticated={false}
                 >
-                    <Calendar />
                 </PublicRoute>
 
             </Switch>

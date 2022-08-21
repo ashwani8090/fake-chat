@@ -1,5 +1,5 @@
-import Calendar from './Calendar';
+import Messenger from './messenger';
 
 export {
-    Calendar
+    Messenger
 }
