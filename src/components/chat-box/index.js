@@ -10,8 +10,28 @@ export default function ChatBox({ selectedUser, onUserSelect = () => { } }) {
   const userDetails = useSelector((state) => state?.persistedSlice?.userDetails);
   const selectedUserConversation = activeConversations?.filter((conversation) => conversation.id === selectedUser.id);
 
+
+
+
+
   const onMessageSend = (message) => {
-    const newConversations = { ...selectedUser, message, date: new Date().getTime(), reply: 'Reply....', userDetails }
+    const fakeReply = {
+      'hi': 'Hello',
+      'hello': 'Hello',
+      'hey': 'Hello',
+      'how are you': 'I am ' + selectedUser?.name,
+      'name': 'My name is John',
+      'fine': 'I am fine',
+      'fine thanks': 'I am fine',
+      'fine thank you': 'I am fine',
+      'fine thank you very much': 'I am fine',
+      'what is your name': 'My name is ' + selectedUser?.name,
+      'what your name?': 'My name is ' + selectedUser?.name,
+      'age': 'I am ' + selectedUser?.age + ' years old',
+      'what is your age': 'I am ' + selectedUser?.age + ' years old',
+      'what is your designation': 'I am ' + selectedUser?.designation,
+    }[message?.toLowerCase()];
+    const newConversations = { ...selectedUser, message, date: new Date().getTime(), reply: fakeReply || 'Not sure', userDetails }
     const conversations = [...activeConversations, newConversations];
     dispatch(setConversations(conversations));
   }
@@ -22,18 +42,17 @@ export default function ChatBox({ selectedUser, onUserSelect = () => { } }) {
         {
           selectedUserConversation?.reverse()?.map((conversation) => (
             <React.Fragment key={conversation.date}>
-              <div className='chat-row-me' >
-                <div className='chat-msg-me'>{conversation.message}</div>
-                <img height={40} width={40} className='chat-avatar' src={userDetails?.profileImage} alt='avatar' />
-              </div>
-
-
               <div className='chat-row' >
                 <img onClick={() => {
                   onUserSelect(selectedUser)
                 }}
                   height={40} width={40} className='chat-avatar' src={conversation.profileImage} alt='avatar' />
                 <div className='chat-msg'>{conversation.reply}</div>
+              </div>
+
+              <div className='chat-row-me' >
+                <div className='chat-msg-me'>{conversation.message}</div>
+                <img height={40} width={40} className='chat-avatar' src={userDetails?.profileImage} alt='avatar' />
               </div>
             </React.Fragment>
           ))
