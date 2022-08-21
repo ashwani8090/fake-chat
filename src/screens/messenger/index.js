@@ -2,7 +2,7 @@ import React from 'react';
 import { ExpandableList, ProfileCard, ChatBox } from '../../components';
 import { MessageOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserDetails } from '../../redux/slices/persistedSlice';
+import { setActiveUsers, setArchivedUsers, setUserDetails } from '../../redux/slices/persistedSlice';
 import './styles.css';
 
 const Messenger = () => {
@@ -11,6 +11,7 @@ const Messenger = () => {
     const [selectedUser, setSelectedUser] = React.useState(defaultUser);
     const archivedUsers = useSelector((state) => state?.persistedSlice?.archivedUsers);
     const userDetails = useSelector((state) => state?.persistedSlice?.userDetails);
+    const [isProfileOpen, setIsProfileOpen] = React.useState(false);
     const dispatch = useDispatch();
 
     const onItemClick = (item) => {
@@ -39,17 +40,46 @@ const Messenger = () => {
                     onRowClick={onItemClick}
                     isExpanded title="Active Conversations"
                     adjacentItemMsg={4}
+                    onProfileIconClick={(data) => {
+                        setSelectedUser(data);
+                        setIsProfileOpen(!isProfileOpen)
+                    }
+                    }
                     list={activeUsers} />
                 <ExpandableList
+                    onProfileIconClick={(data) => {
+                        setSelectedUser(data);
+                        setIsProfileOpen(!isProfileOpen)
+                    }}
                     title="Archived Conversations"
                     adjacentItemMsg={archivedUsers?.length}
                     list={archivedUsers} />
             </div>
             <div className='chat-box-container'>
-                <ChatBox selectedUser={selectedUser} />
+                <ChatBox selectedUser={selectedUser}
+                    onUserSelect={() => {
+                        setIsProfileOpen(!isProfileOpen)
+                    }} />
             </div>
-            <div className='right-side-panel'>
-            </div>
+            {isProfileOpen && <div className='right-side-panel'>
+                <ProfileCard
+                    onArchive={(data) => {
+                        dispatch(setActiveUsers(activeUsers.filter((user) => user.id !== data.id)));
+                        dispatch(setArchivedUsers([...(archivedUsers || []), { ...data, isArchived: true }]));
+                    }}
+                    canActive={false}
+                    email={selectedUser?.email}
+                    name={selectedUser?.name}
+                    isOtherUser={true}
+                    canArchive={true}
+                    data={selectedUser}
+                    onUnArchive={(data) => {
+                        console.log('data: ', data);
+                        dispatch(setArchivedUsers(archivedUsers.filter((user) => user.id !== data.id)));
+                        dispatch(setActiveUsers([...(activeUsers || []), { ...data, isArchived: false }]));
+                    }}
+                    profileImg={selectedUser?.profileImage} />
+            </div>}
         </div>
     )
 }

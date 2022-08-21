@@ -11,18 +11,14 @@ export const INITIAL_PERSISTED_STATE = {
     },
     accessToken: null,
     activeUsers: [
-        { id: '1', name: 'Henry Boyd', profileImage: profileImage2 },
-        { id: '2', name: 'Martha Curtis', profileImage: profileImage2 },
-        { id: '3', name: 'Phillip Tucker', profileImage: profileImage1 },
-        { id: '4', name: 'Ethan Hunt', profileImage: profileImage2 },
-        { id: '5', name: 'John', profileImage: profileImage2 }
+        { id: '1', name: 'Henry Boyd', profileImage: profileImage2, email: 'henry@yopmail' },
+        { id: '2', name: 'Martha Curtis', profileImage: profileImage2, email: 'martha@yopmail' },
+        { id: '3', name: 'Phillip Tucker', profileImage: profileImage1, email: 'phillip@yopmail' },
+        { id: '4', name: 'Ethan Hunt', profileImage: profileImage2, email: 'ethan@yopmail' },
+        { id: '5', name: 'John', profileImage: profileImage2, email: 'john@yopmail' },
     ],
     archivedUsers: [
-        { id: '1', name: 'Henry Boyd', profileImage: profileImage1 },
-        { id: '2', name: 'Martha Curtis', profileImage: profileImage2 },
-        { id: '3', name: 'Phillip Tucker', profileImage: profileImage1 },
-        { id: '4', name: 'Ethan Hunt', profileImage: profileImage2 },
-        { id: '5', name: 'John', profileImage: profileImage2 }
+
     ],
     activeConversations: []
 }

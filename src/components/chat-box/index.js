@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setConversations } from '../../redux/slices/persistedSlice';
 import './styles.css';
 
-export default function ChatBox({ selectedUser }) {
+export default function ChatBox({ selectedUser, onUserSelect = () => { } }) {
   const dispatch = useDispatch();
   const activeConversations = useSelector((state) => state?.persistedSlice?.activeConversations);
   const userDetails = useSelector((state) => state?.persistedSlice?.userDetails);
   const selectedUserConversation = activeConversations?.filter((conversation) => conversation.id === selectedUser.id);
+
   const onMessageSend = (message) => {
     const newConversations = { ...selectedUser, message, date: new Date().getTime(), reply: 'Reply....', userDetails }
     const conversations = [...activeConversations, newConversations];
@@ -28,7 +29,10 @@ export default function ChatBox({ selectedUser }) {
 
 
               <div className='chat-row' >
-                <img height={40} width={40} className='chat-avatar' src={conversation.profileImage} alt='avatar' />
+                <img onClick={() => {
+                  onUserSelect(selectedUser)
+                }}
+                  height={40} width={40} className='chat-avatar' src={conversation.profileImage} alt='avatar' />
                 <div className='chat-msg'>{conversation.reply}</div>
               </div>
             </React.Fragment>

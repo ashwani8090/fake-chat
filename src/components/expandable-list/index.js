@@ -2,7 +2,7 @@ import React from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import './styles.css';
 
-const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false, onRowClick = () => { }, defaultUser = {} }) => {
+const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false, onRowClick = () => { }, defaultUser = {}, onProfileIconClick = () => { } }) => {
     const [expanded, setExpanded] = React.useState(isExpanded);
     const [selectedUser, setSelectedUser] = React.useState(defaultUser);
     const onExpand = () => {
@@ -40,7 +40,10 @@ const ExpandableList = ({ title, adjacentItemMsg, list = [], isExpanded = false,
                                             onRowClick(item);
                                             setSelectedUser(item)
                                         }}>
-                                        <img src={profileImage} alt={name} className='expandable_item_icon' />
+                                        <img onClick={() => {
+                                            onProfileIconClick(item)
+                                        }
+                                            } src={profileImage} alt={name} className='expandable_item_icon' />
                                         <div className='expandable_item_title'>{name}</div>
                                     </div>)
                             })
