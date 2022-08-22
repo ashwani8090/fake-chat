@@ -10,17 +10,13 @@ export default function ChatBox({ selectedUser, onUserSelect = () => { } }) {
   const userDetails = useSelector((state) => state?.persistedSlice?.userDetails);
   const selectedUserConversation = activeConversations?.filter((conversation) => conversation.id === selectedUser.id);
 
-
-
-
-
   const onMessageSend = (message) => {
     const fakeReply = {
       'hi': 'Hello',
       'hello': 'Hello',
       'hey': 'Hello',
       'how are you': 'I am ' + selectedUser?.name,
-      'name': 'My name is John',
+      'name': 'My name is '+ selectedUser?.name,
       'fine': 'I am fine',
       'fine thanks': 'I am fine',
       'fine thank you': 'I am fine',
