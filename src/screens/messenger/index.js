@@ -12,6 +12,7 @@ const Messenger = () => {
     const archivedUsers = useSelector((state) => state?.persistedSlice?.archivedUsers);
     const userDetails = useSelector((state) => state?.persistedSlice?.userDetails);
     const [isProfileOpen, setIsProfileOpen] = React.useState(false);
+    const [profileData,setProfileData] = React.useState(false);
     const dispatch = useDispatch();
 
     const onItemClick = (item) => {
@@ -41,15 +42,25 @@ const Messenger = () => {
                     isExpanded title="Active Conversations"
                     adjacentItemMsg={4}
                     onProfileIconClick={(data) => {
-                        setSelectedUser(data);
-                        setIsProfileOpen(!isProfileOpen)
-                    }
-                    }
+                        console.log('data: ', data);
+                        if (profileData?.id === data?.id) {
+                            setIsProfileOpen(false)
+                            setProfileData(null);
+                        } else {
+                            setIsProfileOpen(true);
+                            setProfileData(data);
+                        }
+                    }}
                     list={activeUsers} />
                 <ExpandableList
                     onProfileIconClick={(data) => {
-                        setSelectedUser(data);
-                        setIsProfileOpen(!isProfileOpen)
+                        if (profileData?.id === data?.id) {
+                            setIsProfileOpen(false)
+                            setProfileData(null);
+                        } else {
+                            setIsProfileOpen(true);
+                            setProfileData(data);
+                        }
                     }}
                     title="Archived Conversations"
                     adjacentItemMsg={archivedUsers?.length}
@@ -68,17 +79,17 @@ const Messenger = () => {
                         dispatch(setArchivedUsers([...(archivedUsers || []), { ...data, isArchived: true }]));
                     }}
                     canActive={false}
-                    email={selectedUser?.email}
-                    name={selectedUser?.name}
+                    email={profileData?.email}
+                    name={profileData?.name}
                     isOtherUser={true}
                     canArchive={true}
-                    data={selectedUser}
+                    data={profileData}
                     onUnArchive={(data) => {
                         console.log('data: ', data);
                         dispatch(setArchivedUsers(archivedUsers.filter((user) => user.id !== data.id)));
                         dispatch(setActiveUsers([...(activeUsers || []), { ...data, isArchived: false }]));
                     }}
-                    profileImg={selectedUser?.profileImage} />
+                    profileImg={profileData?.profileImage} />
             </div>}
         </div>
     )
